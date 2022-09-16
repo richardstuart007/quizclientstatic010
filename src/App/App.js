@@ -66,7 +66,7 @@ function App() {
   //
   //  Update Valtio store with URL and Server Name - LOCAL
   //
-  if (port === '8003') {
+  if (port === '8004') {
     ValtioStore.v_Server = SERVER_LOCAL
     ValtioStore.v_URL = URL_LOCAL
     console.log(

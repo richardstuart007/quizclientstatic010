@@ -22,8 +22,8 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "set PORT=8003 && react-scripts start",
-    "startlocal": "set PORT=8003 && react-scripts start",
+    "start": "set PORT=8004 && react-scripts start",
+    "startlocal": "set PORT=8004 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
