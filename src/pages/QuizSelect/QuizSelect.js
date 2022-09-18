@@ -3,7 +3,7 @@
 //
 import { useSnapshot } from 'valtio'
 import { useState } from 'react'
-import { Container, Grid, Typography } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 //
 //  Debug Settings
 //
@@ -24,10 +24,6 @@ import { useMyForm, MyForm } from '../../components/controls/useMyForm'
 //
 import { ValtioStore } from '../ValtioStore'
 import randomSort from '../../services/randomSort'
-//
-//  Constants
-//
-const { ROWS_MAX } = require('../../services/constants.js')
 //
 let g_staticData = null
 let g_DataLoad = null
@@ -175,9 +171,9 @@ const QuizSelect = () => {
     if ('MaxQuestions' in fieldValues)
       temp.MaxQuestions =
         parseInt(fieldValues.MaxQuestions) > 0 &&
-        parseInt(fieldValues.MaxQuestions) <= ROWS_MAX
+        parseInt(fieldValues.MaxQuestions) <= 100
           ? ''
-          : `You must select between 1 and ${ROWS_MAX}.`
+          : `You must select between 1 and 100.`
     //
     //  Set the errors
     //
@@ -508,106 +504,102 @@ const QuizSelect = () => {
   //...................................................................................
   return (
     <>
-      <Grid container>
-        <Container>
-          <MyForm>
-            <Grid container spacing={2}>
-              {/*.................................................................................................*/}
-              {g_showOwner ? (
-                <Grid item xs={12}>
-                  <MySelect
-                    name='qowner'
-                    label='Owner'
-                    value={values.qowner}
-                    onChange={handleInputChange}
-                    options={g_OwnerOptions}
-                    error={errors.qowner}
-                    disabled={g_disabled}
-                  />
-                </Grid>
-              ) : null}
-
-              {/*.................................................................................................*/}
-              {g_showGroup1 ? (
-                <Grid item xs={12}>
-                  <MySelect
-                    name='qgroup1'
-                    label='Group1'
-                    value={values.qgroup1}
-                    onChange={handleInputChange}
-                    options={g_Group1OptionsSubset}
-                    error={errors.qgroup1}
-                    disabled={g_disabled}
-                  />
-                </Grid>
-              ) : null}
-
-              {g_showGroup2 ? (
-                <Grid item xs={12}>
-                  <MySelect
-                    name='qgroup2'
-                    label='Group2'
-                    value={values.qgroup2}
-                    onChange={handleInputChange}
-                    options={g_Group2Options}
-                    disabled={g_disabled}
-                  />
-                </Grid>
-              ) : null}
-
-              {g_showGroup3 ? (
-                <Grid item xs={12}>
-                  <MySelect
-                    name='qgroup3'
-                    label='Group3'
-                    value={values.qgroup3}
-                    onChange={handleInputChange}
-                    options={g_Group3Options}
-                    disabled={g_disabled}
-                  />
-                </Grid>
-              ) : null}
-              {/*.................................................................................................*/}
-
-              <Grid item xs={6}>
-                <MyInput
-                  name='MaxQuestions'
-                  label='MaxQuestions'
-                  value={values.MaxQuestions}
-                  onChange={handleInputChange}
-                  error={errors.MaxQuestions}
-                />
-              </Grid>
-              {/*.................................................................................................*/}
-              <Grid item xs={12}>
-                <Typography style={{ color: 'red' }}>{form_message}</Typography>
-              </Grid>
-
-              {/*.................................................................................................*/}
-              <Grid item xs={6}>
-                <MyButton
-                  text='Start Quiz'
-                  onClick={() => {
-                    g_PageNew = 'Quiz'
-                    SubmitForm()
-                  }}
-                />
-              </Grid>
-
-              <Grid item xs={6}>
-                <MyButton
-                  text='Learn'
-                  onClick={() => {
-                    g_PageNew = 'QuizRefs'
-                    SubmitForm()
-                  }}
-                />
-              </Grid>
-              {/*.................................................................................................*/}
+      <MyForm>
+        <Grid container spacing={2}>
+          {/*.................................................................................................*/}
+          {g_showOwner ? (
+            <Grid item xs={12}>
+              <MySelect
+                name='qowner'
+                label='Owner'
+                value={values.qowner}
+                onChange={handleInputChange}
+                options={g_OwnerOptions}
+                error={errors.qowner}
+                disabled={g_disabled}
+              />
             </Grid>
-          </MyForm>
-        </Container>
-      </Grid>
+          ) : null}
+
+          {/*.................................................................................................*/}
+          {g_showGroup1 ? (
+            <Grid item xs={12}>
+              <MySelect
+                name='qgroup1'
+                label='Group1'
+                value={values.qgroup1}
+                onChange={handleInputChange}
+                options={g_Group1OptionsSubset}
+                error={errors.qgroup1}
+                disabled={g_disabled}
+              />
+            </Grid>
+          ) : null}
+
+          {g_showGroup2 ? (
+            <Grid item xs={12}>
+              <MySelect
+                name='qgroup2'
+                label='Group2'
+                value={values.qgroup2}
+                onChange={handleInputChange}
+                options={g_Group2Options}
+                disabled={g_disabled}
+              />
+            </Grid>
+          ) : null}
+
+          {g_showGroup3 ? (
+            <Grid item xs={12}>
+              <MySelect
+                name='qgroup3'
+                label='Group3'
+                value={values.qgroup3}
+                onChange={handleInputChange}
+                options={g_Group3Options}
+                disabled={g_disabled}
+              />
+            </Grid>
+          ) : null}
+          {/*.................................................................................................*/}
+
+          <Grid item xs={6}>
+            <MyInput
+              name='MaxQuestions'
+              label='MaxQuestions'
+              value={values.MaxQuestions}
+              onChange={handleInputChange}
+              error={errors.MaxQuestions}
+            />
+          </Grid>
+          {/*.................................................................................................*/}
+          <Grid item xs={12}>
+            <Typography style={{ color: 'red' }}>{form_message}</Typography>
+          </Grid>
+
+          {/*.................................................................................................*/}
+          <Grid item xs={6}>
+            <MyButton
+              text='Start Quiz'
+              onClick={() => {
+                g_PageNew = 'Quiz'
+                SubmitForm()
+              }}
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <MyButton
+              text='Learn'
+              onClick={() => {
+                g_PageNew = 'QuizRefs'
+                SubmitForm()
+              }}
+            />
+          </Grid>
+          {/*.................................................................................................*/}
+        </Grid>
+      </MyForm>
       <QuizInfo />
     </>
   )

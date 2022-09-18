@@ -11,9 +11,6 @@ import debugSettings from '../debug/debugSettings'
 //
 import QuizSettings from './QuizSettings/QuizSettings'
 import QuizSplash from './QuizSplash/QuizSplash'
-import QuizRegister from './QuizRegister/QuizRegister'
-import QuizSignin from './QuizSignin/QuizSignin'
-import QuizServerData from './QuizServerData/QuizServerData'
 import QuizSelect from './QuizSelect/QuizSelect'
 import Quiz from './Quiz/Quiz'
 import QuizReview from './QuizReview/QuizReview'
@@ -33,7 +30,6 @@ const debugLog = debugSettings()
 //
 //  Global Variables
 //
-let g_StaticData
 let g_Params
 let g_HideParams
 let g_Page
@@ -112,14 +108,6 @@ function QuizControl() {
     if (ShowInfo && ShowInfo === 'true') ValtioStore.v_ShowInfo = true
 
     //..............................
-    //.  Data Source
-    //..............................
-    const StaticData = urlParams.get('StaticData')
-    if (StaticData) {
-      StaticData === 'true' ? (g_StaticData = true) : (g_StaticData = false)
-      ValtioStore.v_StaticData = g_StaticData
-    }
-    //..............................
     //.  Selection
     //..............................
     const AllowSelection = urlParams.get('AllowSelection')
@@ -158,53 +146,19 @@ function QuizControl() {
   const Restart = () => {
     if (debugLog) console.log('Restart')
     //
-    //  Load Server data to store
-    //
-    if (g_StaticData === false) {
-      if (debugLog) console.log(`Override Page: ${g_Page} to QuizServerData`)
-      g_Page = 'QuizServerData'
-      ValtioStore.v_Page = g_Page
-
-      g_DataLoad = true
-      ValtioStore.v_DataLoad = g_DataLoad
-    }
-    //
     //  Load Static data to Store (Once only)
     //
-    else {
-      if (debugLog) console.log('g_DataLoad ', g_DataLoad)
-      if (g_DataLoad) {
-        g_DataLoad = false
-        ValtioStore.v_DataLoad = g_DataLoad
+    if (debugLog) console.log('g_DataLoad ', g_DataLoad)
+    if (g_DataLoad) {
+      g_DataLoad = false
+      ValtioStore.v_DataLoad = g_DataLoad
 
-        if (debugLog) console.log('call QuizStaticData ')
-        QuizStaticData()
-      }
-      if (debugLog) console.log(`Override Page: ${g_Page} to QuizSelect`)
-      ValtioStore.v_Page = 'QuizSelect'
-      g_Page = 'QuizSelect'
+      if (debugLog) console.log('call QuizStaticData ')
+      QuizStaticData()
     }
-  }
-  //.............................................................................
-  //.  Force SignIn if neded
-  //.............................................................................
-  const CheckSignIn = () => {
-    if (debugLog) console.log('CheckSignIn')
-    //
-    //  Override the page if Server Data and not signed in
-    //
-    if (debugLog) console.log('g_Page ', g_Page)
-    if (debugLog) console.log('g_SignedIn ', g_SignedIn)
-    if (
-      (g_Page === 'QuizSelect' || g_Page === 'QuizServerData') &
-      (g_StaticData === false) &
-      (g_SignedIn === false)
-    ) {
-      const newPage = 'QuizSignin'
-      if (debugLog) console.log(`Override Page: ${g_Page} to ${newPage}`)
-      g_Page = newPage
-      ValtioStore.v_Page = g_Page
-    }
+    if (debugLog) console.log(`Override Page: ${g_Page} to QuizSelect`)
+    ValtioStore.v_Page = 'QuizSelect'
+    g_Page = 'QuizSelect'
   }
   //.............................................................................
   //  Main Line
@@ -216,7 +170,6 @@ function QuizControl() {
   //
   //  Load Store values
   //
-  g_StaticData = snapShot.v_StaticData
   g_Params = snapShot.v_Params
   g_HideParams = snapShot.v_HideParams
   g_Page = snapShot.v_Page
@@ -224,7 +177,6 @@ function QuizControl() {
   g_DataLoad = snapShot.v_DataLoad
   if (debugLog) console.log('g_HideParams ', g_HideParams)
   if (debugLog) console.log('g_Params ', g_Params)
-  if (debugLog) console.log('g_StaticData ', g_StaticData)
   if (debugLog) console.log('g_DataLoad ', g_DataLoad)
   if (debugLog) console.log('g_SignedIn ', g_SignedIn)
   if (debugLog) console.log('g_Page ', g_Page)
@@ -239,10 +191,6 @@ function QuizControl() {
   //
   if (g_Page === 'QuizRestart') Restart()
   //
-  //  Override the page if Server Data and not signed in
-  //
-  CheckSignIn()
-  //
   //  Present the selected component
   //
   switch (g_Page) {
@@ -250,12 +198,6 @@ function QuizControl() {
       return <QuizSplash />
     case 'QuizSettings':
       return <QuizSettings />
-    case 'QuizRegister':
-      return <QuizRegister />
-    case 'QuizSignin':
-      return <QuizSignin />
-    case 'QuizServerData':
-      return <QuizServerData />
     case 'QuizSelect':
       return <QuizSelect />
     case 'QuizRefs':

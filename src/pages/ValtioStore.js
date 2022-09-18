@@ -4,8 +4,6 @@ const ValtioStore = proxy({
   //
   //  Server
   //
-  v_URL: '',
-  v_Server: '',
   v_StaticData: true,
   //
   // Settings

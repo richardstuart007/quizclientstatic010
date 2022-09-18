@@ -27,7 +27,6 @@ import QuizInfo from '../Common/QuizInfo'
 //  Utilities
 //
 import { ValtioStore } from '../ValtioStore'
-import writeUsersResults from '../../services/writeUsersResults'
 //.............................................................................
 //.  Initialisation
 //.............................................................................
@@ -130,35 +129,6 @@ const QuizReview = () => {
     setAnsIdx(AnsIdx)
     const QuizIdx = AnsNum[AnsIdx]
     setQuizRow(ArrQuestions[QuizIdx])
-    //
-    //  Write Results
-    //
-    const sqlURL = snapShot.v_URL
-    const r_email = snapShot.v_Email
-    const r_datetime = new Date()
-    const r_owner = snapShot.v_Owner
-    const r_group1 = snapShot.v_Group1
-    const r_questions = AnsCount
-    const r_correct = AnsPass
-    //
-    //  Build row
-    //
-    const sqlRow = {
-      r_email: r_email,
-      r_datetime: r_datetime,
-      r_owner: r_owner,
-      r_group1: r_group1,
-      r_questions: r_questions,
-      r_correct: r_correct
-    }
-    //
-    //  Build Parameters & Write Results
-    //
-    const props = {
-      sqlURL: sqlURL,
-      sqlRow: sqlRow
-    }
-    writeUsersResults(props)
   }
   //...................................................................................
   //.  Next Question
