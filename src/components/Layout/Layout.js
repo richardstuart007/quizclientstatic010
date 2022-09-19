@@ -86,17 +86,8 @@ export default function Layout({ children }) {
     case 'QuizSettings':
       title = 'Settings'
       break
-    case 'QuizRegister':
-      title = 'Register'
-      break
-    case 'QuizSignin':
-      title = 'Sign In'
-      break
-    case 'QuizServerData':
-      title = 'Get Server Data'
-      break
     case 'QuizSelect':
-      title = 'Question Selection'
+      title = 'Selection'
       break
     case 'QuizRefs':
       title = 'References'
@@ -105,20 +96,12 @@ export default function Layout({ children }) {
       title = 'Quiz'
       break
     case 'QuizReview':
-      title = 'Quiz Review'
+      title = 'Review'
       break
     default:
       title = CurrentPage
       break
   }
-  //
-  //  Add server
-  //
-  const StaticData = snapShot.v_StaticData
-  const server = snapShot.v_Server
-  StaticData === true
-    ? (title = title + ` (Server:STATIC)`)
-    : (title = title + ` (Server:${server})`)
   //...................................................................................
   //.  Render the component
   //...................................................................................
