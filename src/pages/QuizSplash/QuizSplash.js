@@ -36,31 +36,32 @@ const QuizSplash = () => {
   return (
     <Grid container>
       <Container>
+        <Typography variant='h6' sx={{ marginTop: '8px', color: 'blue' }}>
+          STATIC VERSION 010
+        </Typography>
         <Typography variant='h6' sx={{ marginTop: '8px' }}>
-          This product is in Trial/Development.
+          This product is in Trial/Development
         </Typography>
         <Typography variant='subtitle2' sx={{ marginTop: '8px' }}>
           It has been developed by Richard Stuart and is FREE to use/distribute.
         </Typography>
         <Typography variant='subtitle2' sx={{ marginTop: '8px' }}>
-          If your URL does not work try the ones below
+          Comments you can email me at richardstuart007@hotmail.com
         </Typography>
-        <Typography variant='subtitle2' sx={{ marginTop: '8px' }}>
-          <a href='https://richardstuart007.github.io/quizclientstatic010/'>
-            Static version
-          </a>
+        <Typography variant='subtitle2' sx={{ marginTop: '32px', color: 'red' }}>
+          PLEASE SWITCH TO THE DATABASE VERSION SO THAT YOU CAN SIGN IN AND HAVE A HISTORY OF YOUR
+          QUIZZES
         </Typography>
-        <Typography variant='subtitle2' sx={{ marginTop: '8px' }}>
-          <a href='https://richardstuart007.github.io/quizclient010/'>
-            Database Server Version
-          </a>
+        <Typography variant='h3' sx={{ marginTop: '8px' }}>
+          <a href='https://richardstuart007.github.io/quizclient010/'>Database Version</a>
         </Typography>
-        <Typography variant='subtitle2' sx={{ marginTop: '8px' }}>
-          Alternatively email me at richardstuart007@hotmail.com
+        <Typography variant='subtitle2' sx={{ marginTop: '32px' }}>
+          Alternatively click on the Continue button below to use the static version
         </Typography>
         {/*.................................................................................................*/}
         <Grid item xs={12}>
           <MyButton
+            color='secondary'
             type='submit'
             text='Continue'
             value='Submit'
