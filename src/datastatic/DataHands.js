@@ -2128,6 +2128,13 @@ exports.HANDS = [
     hwest: null
   },
   {
+    hid: 613,
+    hnorth: ['7', 'AK9', 'A2', 'AKJT942'],
+    heast: null,
+    hsouth: null,
+    hwest: null
+  },
+  {
     hid: 614,
     hnorth: ['AJ9876', 'K63', '854', '8'],
     heast: null,
